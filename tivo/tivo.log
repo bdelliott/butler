@@ -1,0 +1,488 @@
+ERROR 2012-07-08 12:35:53,715 base: Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 9, in <module>
+    url(r'^sync/', include('tivo.sync.urls')),
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 24, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+ImportError: No module named sync.urls
+ERROR 2012-07-08 12:35:53,976 base: Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 9, in <module>
+    url(r'^sync/', include('tivo.sync.urls')),
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/conf/urls/__init__.py", line 24, in include
+    urlconf_module = import_module(urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+ImportError: No module named sync.urls
+ERROR 2012-07-08 12:39:58,384 base: Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 213, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 192, in inner
+    current_app=self.name):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 447, in reverse
+    app_list = resolver.app_dict[ns]
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 290, in app_dict
+    self._populate()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 253, in _populate
+    for name in pattern.reverse_dict:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 276, in reverse_dict
+    self._populate()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 265, in _populate
+    lookups.appendlist(pattern.callback, (bits, p_pattern, pattern.default_args))
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 101, in get_callable
+    (lookup_view, mod_name))
+ViewDoesNotExist: Could not import sync.views.job. View does not exist in module sync.views.
+ERROR 2012-07-08 12:40:35,916 base: Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 213, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 192, in inner
+    current_app=self.name):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 447, in reverse
+    app_list = resolver.app_dict[ns]
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 290, in app_dict
+    self._populate()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 253, in _populate
+    for name in pattern.reverse_dict:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 276, in reverse_dict
+    self._populate()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 265, in _populate
+    lookups.appendlist(pattern.callback, (bits, p_pattern, pattern.default_args))
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 101, in get_callable
+    (lookup_view, mod_name))
+ViewDoesNotExist: Could not import sync.views.job. View does not exist in module sync.views.
+ERROR 2012-07-08 12:43:29,566 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 129, in get_response
+    raise ValueError("The view %s.%s didn't return an HttpResponse object." % (callback.__module__, view_name))
+ValueError: The view sync.views.job didn't return an HttpResponse object.
+ERROR 2012-07-08 12:59:17,073 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 3, in <module>
+    from sync.models import SyncJob
+  File "/Users/bde/dev/butler/tivo/sync/sync.py", line 3, in <module>
+    from butler import extractor
+ImportError: No module named butler
+ERROR 2012-07-08 12:59:41,266 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 3, in <module>
+    from sync.models import SyncJob
+  File "/Users/bde/dev/butler/tivo/sync/sync.py", line 3, in <module>
+    from sync import extractor
+ImportError: cannot import name extractor
+ERROR 2012-07-08 13:00:30,036 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 3, in <module>
+    from sync.models import SyncJob
+  File "/Users/bde/dev/butler/tivo/sync/sync.py", line 3, in <module>
+    from sync import extractor
+ImportError: cannot import name extractor
+ERROR 2012-07-08 13:00:31,180 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 3, in <module>
+    from sync.models import SyncJob
+  File "/Users/bde/dev/butler/tivo/sync/sync.py", line 3, in <module>
+    from sync import extractor
+ImportError: cannot import name extractor
+ERROR 2012-07-08 13:00:33,657 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 3, in <module>
+    from sync.models import SyncJob
+  File "/Users/bde/dev/butler/tivo/sync/sync.py", line 3, in <module>
+    from sync import extractor
+ImportError: cannot import name extractor
+ERROR 2012-07-08 13:02:02,022 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 3, in <module>
+    from sync.models import SyncJob
+  File "/Users/bde/dev/butler/tivo/sync/sync.py", line 5, in <module>
+    from sync import extractor
+ImportError: cannot import name extractor
+ERROR 2012-07-08 19:33:32,612 base: Internal Server Error: /auth_processor_messages/
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/auth/tests/urls.py", line 41, in auth_processor_messages
+    info(request, "Message 1")
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/messages/api.py", line 78, in info
+    fail_silently=fail_silently)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/messages/api.py", line 22, in add_message
+    raise MessageFailure('You cannot add messages without installing '
+MessageFailure: You cannot add messages without installing django.contrib.messages.middleware.MessageMiddleware
+ERROR 2012-07-08 20:17:17,305 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 13, in job
+    msg = "Previous job started at %s not yet finished." % job.start
+UnboundLocalError: local variable 'job' referenced before assignment
+ERROR 2012-07-08 20:17:24,834 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 25, in job
+    logger.info(job.show_set())
+TypeError: 'ManyRelatedManager' object is not callable
+ERROR 2012-07-08 20:18:01,646 base: Internal Server Error: /sync/job
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Users/bde/dev/butler/tivo/sync/views.py", line 15, in job
+    return HttpResponse(content=msg)
+NameError: global name 'HttpResponse' is not defined
+ERROR 2012-07-08 20:24:51,586 base: Internal Server Error: /admin/sync/syncjob/
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 4, in <module>
+    admin.autodiscover()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/__init__.py", line 29, in autodiscover
+    import_module('%s.admin' % app)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/admin.py", line 7
+    admin.site.register(SyncJob, SyncJobAdmin))
+                                              ^
+SyntaxError: invalid syntax
+ERROR 2012-07-08 20:24:51,819 base: Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 4, in <module>
+    admin.autodiscover()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/__init__.py", line 29, in autodiscover
+    import_module('%s.admin' % app)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/admin.py", line 7
+    admin.site.register(SyncJob, SyncJobAdmin))
+                                              ^
+SyntaxError: invalid syntax
+ERROR 2012-07-08 20:24:52,747 base: Internal Server Error: /admin/sync/syncjob/
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 4, in <module>
+    admin.autodiscover()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/__init__.py", line 29, in autodiscover
+    import_module('%s.admin' % app)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/admin.py", line 7
+    admin.site.register(SyncJob, SyncJobAdmin))
+                                              ^
+SyntaxError: invalid syntax
+ERROR 2012-07-08 20:24:52,881 base: Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 4, in <module>
+    admin.autodiscover()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/__init__.py", line 29, in autodiscover
+    import_module('%s.admin' % app)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/admin.py", line 7
+    admin.site.register(SyncJob, SyncJobAdmin))
+                                              ^
+SyntaxError: invalid syntax
+ERROR 2012-07-08 20:25:26,194 base: Internal Server Error: /admin/sync/syncjob/
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 4, in <module>
+    admin.autodiscover()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/__init__.py", line 29, in autodiscover
+    import_module('%s.admin' % app)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/admin.py", line 8, in <module>
+    admin.site.register(Show)
+NameError: name 'Show' is not defined
+ERROR 2012-07-08 20:25:26,340 base: Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 4, in <module>
+    admin.autodiscover()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/__init__.py", line 29, in autodiscover
+    import_module('%s.admin' % app)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/admin.py", line 8, in <module>
+    admin.site.register(Show)
+NameError: name 'Show' is not defined
+ERROR 2012-07-08 20:25:27,820 base: Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/tivo/urls.py", line 4, in <module>
+    admin.autodiscover()
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/contrib/admin/__init__.py", line 29, in autodiscover
+    import_module('%s.admin' % app)
+  File "/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/bde/dev/butler/tivo/sync/admin.py", line 8, in <module>
+    admin.site.register(Show)
+NameError: name 'Show' is not defined

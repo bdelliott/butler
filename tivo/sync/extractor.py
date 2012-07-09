@@ -129,6 +129,7 @@ class Extractor(object):
             "date": date,
             "num_items": num_items,
             "hour_min_sec": hour_min_sec,
+            "size": sz,
             "link_url": link_url,
         }
 

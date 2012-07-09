@@ -1,11 +1,11 @@
 import logging
 
-from butler import extractor
-from butler import net
+from . import extractor
+from . import net
 
 logger = logging.getLogger(__name__)
 
-def sync_shows():
+def get_shows():
     index_html = net.tivoget()
     items = extractor.read_index(index_html)
     shows = []
@@ -24,5 +24,5 @@ def sync_shows():
 
 
     logger.info("%d shows extracted" % len(shows))
-
+    return shows
     
