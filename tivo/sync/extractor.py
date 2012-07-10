@@ -1,6 +1,8 @@
+import datetime
 import logging
 import os
 
+from django.utils.timezone import utc
 import bs4
 
 logger = logging.getLogger(__name__)
@@ -65,7 +67,7 @@ class Extractor(object):
         if br:
             description = br.text.strip()
         else:
-            description = None
+            description = ""
         logger.debug("Description: %s" % description)
         
         # fourth col is a date: (e.g. Sat 7/5)
@@ -76,9 +78,17 @@ class Extractor(object):
             date = None
         else:
             # yes there is a date to parse
-            day_of_week = td_date.text[0:3]  # e.x Sat
-            date = td_date.text[3:6]  # e.x. 7/7
-
+            # it's day of week e.g. Sat
+            # some whitespace and a date like 7/7
+            txt = td_date.text.strip()
+            txt = txt.replace(" ", "")
+            day_of_week = txt[0:3]
+            date = txt[3:6]
+            (month, day) = date.split("/")
+            month = int(month)
+            day = int(day)
+            year = datetime.date.today().year
+            date = datetime.datetime(year, month, day).replace(tzinfo=utc)
         logger.debug("Day of week: %s" % day_of_week)
         logger.debug("Date: %s" % date)
 
@@ -89,7 +99,7 @@ class Extractor(object):
         assert(td_size.has_key("align"))
 
         num_items = None
-        hour_min_sec = None
+        mins = None
         sz = None
 
         if is_folder:
@@ -100,9 +110,18 @@ class Extractor(object):
             # runtime/filesize:
             # 2 lines: 0:30:00
             #          990 MB
-            hour_min_sec = td_size.contents[0]
+            runtime = td_size.contents[0]
+            logger.debug("Runtime: %s" % runtime)
+            (hours, mins, secs) = runtime.split(":")
+            hours = int(hours)
+            mins = int(mins)
+            mins += hours * 60
+            logger.debug("Runtime in minutes: %d" % mins)
+
             (sz, units) = td_size.br.text.strip().split()
-            logger.debug("Runtime: %s" % hour_min_sec)
+
+            # convert runtime to minutes:
+
             sz = float(sz)
             if units == "GB":
                 sz = sz * 1024  # convert to MB
@@ -128,7 +147,7 @@ class Extractor(object):
             "day_of_week": day_of_week,
             "date": date,
             "num_items": num_items,
-            "hour_min_sec": hour_min_sec,
+            "duration": mins,
             "size": sz,
             "link_url": link_url,
         }
@@ -181,7 +200,7 @@ if __name__=='__main__':
     print soup.prettify()
     """
 
-    test_dir = os.path.join(os.getcwd(), "test")
+    test_dir = os.path.join(os.getcwd(), "testhtml")
     test_file = open(os.path.join(test_dir, "folder.html"))
     html = test_file.read()
     test_file.close()

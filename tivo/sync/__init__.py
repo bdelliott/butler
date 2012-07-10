@@ -19,8 +19,8 @@ def get_shows():
                 folder_html = net.tivoget(url)
                 folder_items = extractor.read_folder(folder_html)
                 shows.extend(folder_items)
-            else:
-                shows.append(item)
+        else:
+            shows.append(item)
 
 
     logger.info("%d shows extracted" % len(shows))

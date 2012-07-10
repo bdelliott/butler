@@ -169,10 +169,10 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'tivo': {
+        'sync': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
-            'propagate': False,
+            'propagate': True,
         }
     }
 }

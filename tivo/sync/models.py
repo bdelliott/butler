@@ -13,9 +13,18 @@ class Show(models.Model):
     title = models.CharField("Title", max_length=128)
     description = models.CharField("Description", max_length=512, default="",
             blank=True)
-    date = models.DateTimeField("Date/time of recording")
+    date = models.DateField("Date of recording")
     duration = models.IntegerField("Duration in minutes")
-    url = models.URLField("MPEG PS File URL", max_length=1024)
+
+    # some dbag shows can't be downloaded from TiVo:
+    url = models.URLField("MPEG PS File URL", max_length=1024, null=True,
+            blank=True)
     size = models.IntegerField("File size in MB")
 
     jobs = models.ManyToManyField(SyncJob)
+
+class WishKeyword(models.Model):
+    """Search keyword(s) to match in an AND fashion"""
+    keyword1 = models.CharField("Keyword 1", max_length=80)
+    keyword2 = models.CharField("Keyword 2", max_length=80, default="")
+    keyword3 = models.CharField("Keyword 3", max_length=80, default="")
