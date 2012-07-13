@@ -13,6 +13,8 @@ class Show(models.Model):
             blank=True)
     size = models.IntegerField("File size in MB")
 
+    def __str__(self):
+        return "%s - %s" % (self.date, self.title)
 
 class SyncJob(models.Model):
     """Represent one sync/extraction run"""
@@ -38,5 +40,11 @@ class LibraryItem(models.Model):
 class WishKeyword(models.Model):
     """Search keyword(s) to match in an AND fashion"""
     keyword1 = models.CharField("Keyword 1", max_length=80)
-    keyword2 = models.CharField("Keyword 2", max_length=80, default="")
-    keyword3 = models.CharField("Keyword 3", max_length=80, default="")
+    keyword2 = models.CharField("Keyword 2", max_length=80, default="",
+            blank=True)
+    keyword3 = models.CharField("Keyword 3", max_length=80, default="",
+            blank=True)
+
+    def __str__(self):
+        return "['%s', '%s', '%s']" % (self.keyword1, self.keyword2,
+                self.keyword3)

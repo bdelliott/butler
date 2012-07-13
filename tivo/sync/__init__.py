@@ -28,10 +28,9 @@ def get_shows():
     return shows
     
 
-def sync_in_progress():
+def latest_job():
     """check on status of the last, possibly unfinished job"""
     try:
-        job = models.SyncJob.objects.latest('start')
-        return not job.end
+        return models.SyncJob.objects.latest('start')
     except models.SyncJob.DoesNotExist:
         return False
