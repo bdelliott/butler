@@ -1,6 +1,7 @@
 import logging
 
 from . import extractor
+from . import models
 from . import net
 
 logger = logging.getLogger(__name__)
@@ -26,3 +27,11 @@ def get_shows():
     logger.info("%d shows extracted" % len(shows))
     return shows
     
+
+def sync_in_progress():
+    """check on status of the last, possibly unfinished job"""
+    try:
+        job = models.SyncJob.objects.latest('start')
+        return not job.end
+    except models.SyncJob.DoesNotExist:
+        return False

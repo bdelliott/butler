@@ -1,13 +1,5 @@
 from django.db import models
 
-class SyncJob(models.Model):
-    """Represent one sync/extraction run"""
-    start = models.DateTimeField("Job start time", auto_now_add=True)
-    end = models.DateTimeField("Job end time", null=True, blank=True)
-
-    def __str__(self):
-        return "[Start: %s, End: %s]" % (self.start, self.end)
-
 class Show(models.Model):
     """A single show from the Tivo."""
     title = models.CharField("Title", max_length=128)
@@ -21,7 +13,27 @@ class Show(models.Model):
             blank=True)
     size = models.IntegerField("File size in MB")
 
-    jobs = models.ManyToManyField(SyncJob)
+
+class SyncJob(models.Model):
+    """Represent one sync/extraction run"""
+    start = models.DateTimeField("Job start time", auto_now_add=True)
+    end = models.DateTimeField("Job end time", null=True, blank=True)
+
+    shows = models.ManyToManyField(Show)
+
+    def __str__(self):
+        return "[Start: %s, End: %s]" % (self.start, self.end)
+
+
+class LibraryItem(models.Model):
+    """An item to download, re-encode, and add stream hints to"""
+    show = models.ForeignKey(Show)
+
+    downloaded = models.BooleanField(default=False)
+    decoded = models.BooleanField(default=False)
+    h264 = models.BooleanField(default=False)
+    hinted = models.BooleanField(default=False)
+
 
 class WishKeyword(models.Model):
     """Search keyword(s) to match in an AND fashion"""

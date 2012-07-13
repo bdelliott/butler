@@ -7,12 +7,10 @@ Replace this with more appropriate tests for your application.
 import datetime
 
 from django.test import TestCase
-from django.utils.timezone import utc
-
-
 
 import sync
 from . import models
+from . import queue
 from . import views
 
 class SyncTestCase(TestCase):
@@ -20,7 +18,7 @@ class SyncTestCase(TestCase):
     def _create_show(self):
         show = {
             "title": "The Walking Dead",
-            "date": datetime.datetime.utcnow().replace(tzinfo=utc),
+            "date": datetime.datetime.now(),
             "link_url": "http://foo.com/blah.mpg",
             "duration": 60,
             "size": 900,
@@ -28,26 +26,26 @@ class SyncTestCase(TestCase):
         return show
  
     def test_sync_in_progress(self):
-        self.assertFalse(views._sync_in_progress())
+        self.assertFalse(sync.sync_in_progress())
 
         job = models.SyncJob()
         job.save()
 
-        self.assertTrue(views._sync_in_progress())
+        self.assertTrue(sync.sync_in_progress())
 
-        now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        now = datetime.datetime.now()
         job.end = now
         job.save()
 
-        self.assertFalse(views._sync_in_progress())
+        self.assertFalse(sync.sync_in_progress())
 
     def test_show_model(self):
         show = self._create_show()
-        show_model = views._get_show_model(show)
+        show_model = queue._get_show_model(show)
         show_id = show_model.id
 
         # calling it again should return the same row
-        show_model = views._get_show_model(show)
+        show_model = queue._get_show_model(show)
         self.assertEqual(show_id, show_model.id)
 
 
@@ -67,8 +65,8 @@ class SyncTestCase(TestCase):
         job = models.SyncJob()
         job.save()
 
-        shows = views._update_show_models(job, shows)
+        shows = queue._update_show_models(job, shows)
         self.assertEqual(1, len(shows))
         show = models.Show.objects.all()[0]
-        num_jobs = len(show.jobs.all())
-        self.assertEqual(1, num_jobs)
+        num_shows = len(job.shows.all())
+        self.assertEqual(1, num_shows)

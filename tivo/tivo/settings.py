@@ -173,6 +173,10 @@ LOGGING = {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
+        },
+        'sync.extractor': {
+            'level': 'INFO',
+            'propagate': True,
         }
     }
 }

@@ -1,5 +1,8 @@
+*.log
 *.mpg
 *.pyc
 *.swp
 *.tivo
-videos
+testhtml
+testvideos
+dss.txt

@@ -2,7 +2,6 @@ import datetime
 import logging
 import os
 
-from django.utils.timezone import utc
 import bs4
 
 logger = logging.getLogger(__name__)
@@ -88,7 +87,7 @@ class Extractor(object):
             month = int(month)
             day = int(day)
             year = datetime.date.today().year
-            date = datetime.datetime(year, month, day).replace(tzinfo=utc)
+            date = datetime.datetime(year, month, day)
         logger.debug("Day of week: %s" % day_of_week)
         logger.debug("Date: %s" % date)
 
