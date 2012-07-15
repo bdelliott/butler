@@ -113,6 +113,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    "/Users/bde/dev/butler/tivo/templates",
 )
 
 INSTALLED_APPS = (
@@ -160,13 +161,13 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'tivo.log',
+            'filename': '/Users/bde/dev/butler/log/tivo.log',
             'formatter': 'verbose',
         },
         'extractor': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'extractor.log',
+            'filename': '/Users/bde/dev/butler/log/extractor.log',
             'formatter': 'verbose',
         }
     },

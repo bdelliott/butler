@@ -1,14 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Library</title>
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        {% for item in items %}
-        {{ item.show }} <br/>
-        {% endfor %}
-    </body>
+{% block body %}
+<body>
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Tivo Butler</h1>
+            <p>Streaming video, without the pain.</p>
+        </div>
+
+        <div class="navbar">
+           <div class="navbar-inner">
+              <div class="container">
+                  <a class="brand" href="#">Tivo Butler</a>
+                  <ul class="nav">
+                      <li class="active"><a href="#">Now Playing</a></li>
+                      <li><a href="/tivobutler/sync/job">Sync</a></li>
+                      <li><a href="/tivobutler/sync/process_queue">Queue</a></li>
+                      <li><a href="/tivobutler/admin">Django Admin</a></li>
+                  </ul>
+              </div>
+           </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.show.date|date:"D, n/j" }}</td>
+                    <td><a href="{{ item.url }}">{{ item.show.title }}</a></td>
+                    <td>{{ item.show.description }}</td>
+                    <td>{{ item.show.duration }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</body>
+{% endblock %}
 
 </html>
-

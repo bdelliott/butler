@@ -44,17 +44,15 @@ class LibraryItem(models.Model):
     h264 = models.BooleanField(default=False)
 
     def filename(self, ext="tivo"):
-        if not os.path.exists("videos"):
-            os.mkdir("videos")
-
         fname = "%s.%s.%d.%s" % (self.show.datestr(), self.show.title,
                 self.show.tivo_id, ext)
         return fname
 
+    def url(self):
+        return "/%s/%s" % (self.vdir(), self.filename(ext="mp4"))
+
     def vdir(self):
         d = "videos"
-        if not os.path.exists(d):
-            os.mkdir(d)
         return d
 
     def __str__(self):

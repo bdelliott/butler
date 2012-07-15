@@ -1,5 +1,5 @@
 """
-WSGI config for tivosync project.
+WSGI config for tivo project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -15,7 +15,8 @@ framework.
 """
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tivosync.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tivo.settings")
+os.environ.setdefault("MAK", "6596872327")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
