@@ -34,7 +34,6 @@ class LibraryItem(models.Model):
     downloaded = models.BooleanField(default=False)
     decoded = models.BooleanField(default=False)
     h264 = models.BooleanField(default=False)
-    hinted = models.BooleanField(default=False)
 
 
 class WishKeyword(models.Model):

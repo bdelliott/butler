@@ -2,7 +2,7 @@ from django.contrib import admin
 from sync.models import LibraryItem, Show, SyncJob, WishKeyword
 
 class LibraryItemAdmin(admin.ModelAdmin):
-    list_display = ['show', 'downloaded', 'decoded', 'h264', 'hinted']
+    list_display = ['show', 'downloaded', 'decoded', 'h264']
 
 class ShowAdmin(admin.ModelAdmin):
     list_display = ['date', 'title', 'duration', 'size']
