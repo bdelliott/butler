@@ -20,6 +20,7 @@ class SyncTestCase(TestCase):
 
     def _create_show(self):
         show = {
+            "tivo_id": 1234,
             "title": "The Walking Dead",
             "date": datetime.datetime.now(),
             "link_url": "http://foo.com/blah.mpg",
@@ -30,6 +31,7 @@ class SyncTestCase(TestCase):
     
     def _create_show_model(self, **kwargs):
         values = {
+            "tivo_id": 1234,
             "title": "Late Night With Jimmy Fallon",
             "description": "",
             "date": datetime.datetime.now(),

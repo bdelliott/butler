@@ -4,8 +4,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
     # url(r'^$', 'tivo.views.home', name='home'),
+
+    url(r'^library/', include('library.urls')),
     url(r'^sync/', include('sync.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

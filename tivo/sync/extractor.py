@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+import re
 
 import bs4
 
@@ -82,7 +83,7 @@ class Extractor(object):
             txt = td_date.text.strip()
             txt = txt.replace(" ", "")
             day_of_week = txt[0:3]
-            date = txt[3:6]
+            date = txt[3:]
             (month, day) = date.split("/")
             month = int(month)
             day = int(day)
@@ -132,12 +133,23 @@ class Extractor(object):
         assert(td_links.has_key("align"))
 
         # this should get either the folder url or the MPEG PS download link:
+        tivo_id = -1
         if not td_links.a:
             link_url = None
         else:
             link_url = td_links.a['href']
 
+        if link_url and not is_folder:
+            # extract the tivo show id from the url:
+            pattern= re.compile(r'&id=(?P<tivo_id>\d+)&Format')
+            m = re.search(pattern, link_url)
+            if not m:
+                raise Exception("Can't find Tivo id for title %s, url='%s'" % \
+                        (title, link_url))
+            tivo_id = int(m.group('tivo_id'))
+
         logger.debug("Link URL: %s" % link_url)
+        logger.debug("Tivo ID: %d" % tivo_id)
 
         return {
             "is_folder": is_folder,
@@ -149,6 +161,7 @@ class Extractor(object):
             "duration": mins,
             "size": sz,
             "link_url": link_url,
+            "tivo_id": tivo_id,
         }
 
     def _is_folder(self, img):

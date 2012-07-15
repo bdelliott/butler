@@ -19,13 +19,17 @@ def update(job, shows):
 
 
 def _get_show_model(show):
-    # sanity check some data:
+    """There isn't enough info to uniquely identify the show by title and date
+    because the TiVo doesn't expose recording time, so just use the TiVo id
+    """
+
+    tivo_id = show['tivo_id']
 
     try:
-        return models.Show.objects.get(title=show['title'], date=show['date'],
-                url=show['link_url'])
+        return models.Show.objects.get(tivo_id=tivo_id)
     except models.Show.DoesNotExist:
         model = models.Show()
+        model.tivo_id = tivo_id
         model.title = show['title']
         model.description = show.get('description', "")
         model.date = show['date']
@@ -99,6 +103,14 @@ def _update_show_models(job, shows):
     show_models = []
 
     for show in shows:
+        # skip any shows that don't have a tivo_id and valid url
+        if show['tivo_id'] == -1:
+            logger.debug("No tivo id for show %s.  Skipping." % show['title'])
+            continue
+        if not show['link_url']:
+            logger.debug("No link url for show %s.  Skipping." % show['title'])
+            continue
+
         show_model = _get_show_model(show)
 
         # tag job model with the new show:

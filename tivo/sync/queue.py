@@ -43,7 +43,7 @@ def get_mpeg_info(filename):
 def get_todo_list():
     """Get list of unfinished library items"""
 
-    # assume that a "hinted" file is complete
+    # assume that a "h264" encoded file is complete
     return models.LibraryItem.objects.filter(h264=False)
 
     
@@ -63,28 +63,26 @@ def process(item):
 
 def _decode(item):
     """Run tivodecode on the file to turn it into a plain vanilla mpeg"""
-    tivo_filename = _filename(item)
+    tivo_filename = item.filename()
     logger.info("Decoding %s" % tivo_filename)
 
-    mpeg_filename = _filename(item, ext="mpg")
-    videos_dir = _dir()
+    mpeg_filename = item.filename(ext="mpg")
+    videos_dir = item.vdir()
 
     p = subprocess.Popen(["tivodecode", "--mak", os.environ["MAK"], "--out",
-        mpeg_filename, tivo_filename], videos_dir)
+        mpeg_filename, tivo_filename], cwd=videos_dir, stderr=subprocess.STDOUT,
+        stdout=subprocess.PIPE)
     rc = p.wait()
 
     logger.info("tivodecode returned %d" % rc)
+    logger.info("tivodecode output: '%s'" % p.stdout.read())
     if rc == 0:
         # success!
         item.decoded = True
         item.save()
     else:
-        raise Exception("Tivodecode failed on file %s with rc %d" %
+        raise Exception("Tivodecode failed on file '%s' with rc %d" %
                 (tivo_filename, rc))
-
-
-def _dir():
-    return "videos"
 
     
 def _download(item):
@@ -93,8 +91,8 @@ def _download(item):
     shot.
     """
 
-    filename = _filename(item)
-    filename = os.path.join(_dir(), filename)
+    filename = item.filename()
+    filename = os.path.join(item.vdir(), filename)
     logger.info("Downloading '%s' to %s" % (item.show, filename))
 
     f = open(filename, "wb")
@@ -109,14 +107,6 @@ def _download(item):
     item.save()
     
 
-def _filename(item, ext="tivo"):
-    if not os.path.exists("videos"):
-        os.mkdir("videos")
-
-    fname = item.show.title + "." + ext
-    return fname
-
-
 def _scaled_resolution(width, height):
     """Scale resolution down"""
     if width > 1000:
@@ -129,15 +119,15 @@ def _scaled_resolution(width, height):
 
 
 def _transcode(item):
-    mpeg_filename = _filename(item, ext="mpg")
-    mp4_filename = _filename(item, ext="mp4")
+    mpeg_filename = item.filename(ext="mpg")
+    mp4_filename = item.filename(ext="mp4")
+    videos_dir = item.vdir()
 
-    vdata = get_mpeg_info(mpeg_filename)
+    vdata = get_mpeg_info(os.path.join(videos_dir, mpeg_filename))
     logger.info(vdata)
 
     res = _scaled_resolution(vdata['width'], vdata['height'])
 
-    videos_dir = _dir()
     p = subprocess.Popen(["ffmpeg", "-i", mpeg_filename, "-s", res,
                           "-sameq", mp4_filename], cwd=videos_dir)
     rc = p.wait()

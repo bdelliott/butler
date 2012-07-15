@@ -10,6 +10,7 @@ class ShowAdmin(admin.ModelAdmin):
 
 class SyncJobAdmin(admin.ModelAdmin):
     list_display = ['start', 'end']
+    ordering = ['-start']
 
 class WishKeywordAdmin(admin.ModelAdmin):
     list_display = ['keyword1', 'keyword2', 'keyword3']

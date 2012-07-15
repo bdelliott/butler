@@ -1,7 +1,10 @@
+import os
+
 from django.db import models
 
 class Show(models.Model):
     """A single show from the Tivo."""
+    tivo_id = models.IntegerField("Show id as exposed by Tivo links")
     title = models.CharField("Title", max_length=128)
     description = models.CharField("Description", max_length=512, default="",
             blank=True)
@@ -13,8 +16,13 @@ class Show(models.Model):
             blank=True)
     size = models.IntegerField("File size in MB")
 
+    def datestr(self):
+        """YYYYMMDD"""
+        return self.date.strftime("%Y%m%d")
+
     def __str__(self):
-        return "%s - %s" % (self.date, self.title)
+        return "[%s - %d - %s]" % (self.date, self.tivo_id, self.title)
+
 
 class SyncJob(models.Model):
     """Represent one sync/extraction run"""
@@ -35,6 +43,23 @@ class LibraryItem(models.Model):
     decoded = models.BooleanField(default=False)
     h264 = models.BooleanField(default=False)
 
+    def filename(self, ext="tivo"):
+        if not os.path.exists("videos"):
+            os.mkdir("videos")
+
+        fname = "%s.%s.%d.%s" % (self.show.datestr(), self.show.title,
+                self.show.tivo_id, ext)
+        return fname
+
+    def vdir(self):
+        d = "videos"
+        if not os.path.exists(d):
+            os.mkdir(d)
+        return d
+
+    def __str__(self):
+        return "[%s: downloaded=%d, decoded=%d, h264=%d]" % (self.show,
+                self.downloaded, self.decoded, self.h264)
 
 class WishKeyword(models.Model):
     """Search keyword(s) to match in an AND fashion"""
