@@ -1,17 +1,28 @@
+import fcntl
 import logging
 import os
 import re
+import select
 import subprocess
+import time
 
 from sync import models
 from sync import net
 
 logger = logging.getLogger(__name__)
 
-def get_mpeg_info(filename):
+FFMPEG = "/usr/local/bin/ffmpeg"
+
+def get_mpeg_info(videos_dir, filename):
     """Get MPEG file metadata of interest"""
-    videos_dir = _dir()
-    p = subprocess.Popen(["ffmpeg", "-i", filename], cwd=videos_dir,
+    logger.info("Getting info from %s/%s" % (videos_dir, filename))
+    if not os.path.exists(videos_dir):
+        raise Exception("%s dir does not exist!" % videos_dir)
+    path = os.path.join(videos_dir, filename)
+    if not os.path.exists(path):
+        raise Exception("%s does not exist!" % path)
+
+    p = subprocess.Popen([FFMPEG, "-i", filename], cwd=videos_dir,
             stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     rc = p.wait()
 
@@ -123,17 +134,55 @@ def _transcode(item):
     mp4_filename = item.filename(ext="mp4")
     videos_dir = item.vdir()
 
-    vdata = get_mpeg_info(os.path.join(videos_dir, mpeg_filename))
+    vdata = get_mpeg_info(videos_dir, mpeg_filename)
     logger.info(vdata)
 
     res = _scaled_resolution(vdata['width'], vdata['height'])
 
-    p = subprocess.Popen(["ffmpeg", "-i", mpeg_filename, "-s", res,
-                          "-sameq", mp4_filename], cwd=videos_dir)
-    rc = p.wait()
-    #ffmpeg -i input -res 1/2 or 1/4 -sameq out
-
-    logger.debug("ffmpeg returned %d" % (rc))
+    ffmpeg_args = _transcode_ffmpeg_args(mpeg_filename, mp4_filename, res)
+    rc = _transcode_ffmpeg_subprocess(ffmpeg_args, videos_dir)
 
     item.h264 = True
     item.save()
+
+def _transcode_ffmpeg_args(mpeg_filename, mp4_filename, res):
+    """Generate list of iPad compatible h.264 video options"""
+
+    """
+    697  ffmpeg -i Chef\ Wanted\ With\ Anne\ Burrell\:\ \"The\ Re-Launch\".mpg
+    -strict experimental -acodec aac -ac 2 -ab 160k -s 960x540 -vcodec libx264
+    -vpre iPod640 -b 1200k -f mp4 -threads 0 chef.conversionmatrixsettings.mp4
+    """
+    return [FFMPEG, "-i", mpeg_filename, "-strict", "experimental",
+            "-acodec", "aac", "-ac", "2", "-ab", "160k", "-s", res,
+            "-vcodec", "libx264", "-vpre", "iPod640", "-b", "1200k",
+            "-f", "mp4", "-threads", "0", mp4_filename]
+
+
+def _transcode_ffmpeg_subprocess(ffmpeg_args, videos_dir):
+    p = None
+    try:
+        p = subprocess.Popen(ffmpeg_args, cwd=videos_dir, stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT)
+        
+        #p = subprocess.Popen(["ffmpeg", "-i", mpeg_filename, "-s", res,
+        #                      "-sameq", mp4_filename], cwd=videos_dir)
+        fcntl.fcntl(p.stdout.fileno(), fcntl.F_SETFL,
+                fcntl.fcntl(p.stdout.fileno(), fcntl.F_GETFL) | os.O_NONBLOCK,)
+
+        while p.returncode is None:
+            readx = select.select([p.stdout.fileno()], [], [])[0]
+            if readx:
+                out = p.stdout.read()
+                out = out.replace("\r", "\n")
+                logger.debug(out.strip())
+            time.sleep(0.1)
+
+        if rc != 0:
+            logger.debug("ffmpeg returned %d" % (rc))
+            raise Exception("ffmpeg failure")
+    except:
+        logger.exception("FFMPEG subprocess exception")
+        raise Exception("FFMPEG/subprocess failure")
+        p.kill()    
+

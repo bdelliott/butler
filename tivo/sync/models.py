@@ -52,7 +52,7 @@ class LibraryItem(models.Model):
         return "/%s/%s" % (self.vdir(), self.filename(ext="mp4"))
 
     def vdir(self):
-        d = "videos"
+        d = "/Users/bde/dev/butler/tivo/videos"
         return d
 
     def __str__(self):

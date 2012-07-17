@@ -16,6 +16,7 @@ framework.
 import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tivo.settings")
+os.environ.setdefault("FFMPEG_DATADIR", "/Users/bde/dev/butler/ffmpeg")
 os.environ.setdefault("MAK", "6596872327")
 
 # This application object is used by any WSGI server configured to use this
