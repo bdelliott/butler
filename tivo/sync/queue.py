@@ -80,9 +80,9 @@ def _decode(item):
     mpeg_filename = item.filename(ext="mpg")
     videos_dir = item.vdir()
 
-    p = subprocess.Popen(["tivodecode", "--mak", os.environ["MAK"], "--out",
-        mpeg_filename, tivo_filename], cwd=videos_dir, stderr=subprocess.STDOUT,
-        stdout=subprocess.PIPE)
+    p = subprocess.Popen(["/usr/local/bin/tivodecode", "--mak", os.environ["MAK"], 
+        "--out", mpeg_filename, tivo_filename], cwd=videos_dir,
+        stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     rc = p.wait()
 
     logger.info("tivodecode returned %d" % rc)
