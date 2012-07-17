@@ -170,17 +170,37 @@ def _transcode_ffmpeg_subprocess(ffmpeg_args, videos_dir):
         fcntl.fcntl(p.stdout.fileno(), fcntl.F_SETFL,
                 fcntl.fcntl(p.stdout.fileno(), fcntl.F_GETFL) | os.O_NONBLOCK,)
 
+        delay = 0.1
+        num_give_up = delay * 10 * 60 * 3 # 3 minutes
+        num = 0
+
         while p.returncode is None:
             readx = select.select([p.stdout.fileno()], [], [])[0]
             if readx:
                 out = p.stdout.read()
                 out = out.replace("\r", "\n")
-                logger.debug(out.strip())
+                out = out.strip()
+                if out:
+                    # got output, reset counter
+                    num = 0
+                    logger.debug(out)
+
+                else:
+                    # reading garbage, give up if this has been going on a
+                    # while:
+                    num += 1
+                    if num >= num_give_up:
+                        logger.debug("Giving up on subprocess, rc == %s" %  p.returncode)
+                        p.kill()
+                        break
+
             time.sleep(0.1)
 
+        # A 0 return code is *definitely* not guaranteed even on a successful
+        # run, so just log it.  Sigh.
+        rc = p.returncode
         if rc != 0:
-            logger.debug("ffmpeg returned %d" % (rc))
-            raise Exception("ffmpeg failure")
+            logger.warn("ffmpeg returned %d" % (rc))
     except:
         logger.exception("FFMPEG subprocess exception")
         raise Exception("FFMPEG/subprocess failure")
