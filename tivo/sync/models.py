@@ -44,12 +44,15 @@ class LibraryItem(models.Model):
     h264 = models.BooleanField(default=False)
 
     def filename(self, ext="tivo"):
-        fname = "%s.%s.%d.%s" % (self.show.datestr(), self.show.title,
+        title = self.show.title
+        # ffmpeg can't handle a filename with a ':' character
+        title = title.replace(":", "_")
+        fname = "%s.%s.%d.%s" % (self.show.datestr(), title,
                 self.show.tivo_id, ext)
         return fname
 
     def url(self):
-        return "/%s/%s" % (self.vdir(), self.filename(ext="mp4"))
+        return "/videos/%s" % (self.filename(ext="mp4"))
 
     def vdir(self):
         d = "/Users/bde/dev/butler/tivo/videos"

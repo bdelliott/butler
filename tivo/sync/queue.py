@@ -30,6 +30,9 @@ def get_mpeg_info(videos_dir, filename):
     pattern = r'Video: mpeg2video \(Main\), (?P<vdata>.*?)\n'
     m = re.search(pattern, out)
 
+    if not m:
+        raise Exception("Failed to search mpeg info: '%s'" % out)
+
     vdata = m.groups()[0]
     mdata = vdata.split(", ")
     logger.info(mdata)
@@ -200,7 +203,7 @@ def _transcode_ffmpeg_subprocess(ffmpeg_args, videos_dir):
         # run, so just log it.  Sigh.
         rc = p.returncode
         if rc != 0:
-            logger.warn("ffmpeg returned %d" % (rc))
+            logger.warn("ffmpeg returned %s" % (rc))
     except:
         logger.exception("FFMPEG subprocess exception")
         raise Exception("FFMPEG/subprocess failure")
