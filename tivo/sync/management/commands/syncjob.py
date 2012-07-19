@@ -31,18 +31,18 @@ class Command(NoArgsCommand):
             raise CommandError(msg)
 
         else:
+            job = models.SyncJob()
+            job.save()
             try:
-                self.new_job()
+                self.new_job(job)
             finally:
                 # tag job as complete
                 logger.info("Finishing job %d" % job.id)
                 job.end = datetime.datetime.now()
                 job.save()
 
-    def new_job(self):
+    def new_job(self, job):
         """kick off a new job"""
-        job = models.SyncJob()
-        job.save()
 
         logger.info("Starting sync job %d at %s" % (job.id, job.start))
 
