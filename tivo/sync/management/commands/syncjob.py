@@ -27,8 +27,8 @@ class Command(NoArgsCommand):
             # unfinished
             msg = "Previous job %d started at %s, but not yet finished." % (job.id,
                             job.start)
-            logger.info(msg)
-            raise CommandError(msg)
+            #logger.info(msg)
+            #raise CommandError(msg)
 
         else:
             job = models.SyncJob()

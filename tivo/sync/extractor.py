@@ -36,6 +36,7 @@ class Extractor(object):
         """
         logger.debug("Show/folder extraction:")
 
+        logger.debug(t)
         # first col is an img:
         t = t.img
         is_folder = self._is_folder(t)
@@ -45,6 +46,11 @@ class Extractor(object):
         if td.img:
             # Yep, this has a channel logo.  Skip!
             logger.debug("skipping channel logo")
+            td = td.find_next("td")
+
+        # if this is an empty td, just move on to the next td
+        if len(td.contents) == 0:
+            logger.debug("skipping empty td before title")
             td = td.find_next("td")
 
         # third col is a title and an optional description
@@ -118,7 +124,13 @@ class Extractor(object):
             mins += hours * 60
             logger.debug("Runtime in minutes: %d" % mins)
 
-            (sz, units) = td_size.br.text.strip().split()
+            x = td_size.br.text
+            if x:
+                (sz, units) = x.text.strip().split()
+            else:
+                # the size info is after a closed br:
+                x = td_size.contents[-1]
+                (sz, units) = x.strip().split()
 
             # convert runtime to minutes:
 
